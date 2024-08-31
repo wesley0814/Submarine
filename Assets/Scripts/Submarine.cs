@@ -8,9 +8,10 @@ public class Submarine : MonoBehaviour
     public float speed;
     public Vector3 harpoonArrowDegree;
     public GameObject harpoonArrow;
+    public GameObject Player;
     public GameObject InsideGroup;
 
-    public bool iDown;
+    public bool rDown;
 
     Rigidbody2D rigid;
 
@@ -30,7 +31,7 @@ public class Submarine : MonoBehaviour
     {
         hAxis = Input.GetAxis("Horizontal");
         vAxis = Input.GetAxis("Vertical");
-        iDown = Input.GetButtonDown("Inside");
+        rDown = Input.GetButtonDown("Inside");
     }
 
     void Move()
@@ -56,13 +57,15 @@ public class Submarine : MonoBehaviour
 
     void Inside()
     {
-        if (iDown && !GameManager.Instance.GetInsideMode())
+        if (rDown && !GameManager.Instance.GetInsideMode())
         {
+            Player.SetActive(true);
             InsideGroup.SetActive(true);
             GameManager.Instance.SetInsideMode(true);
         }
-        else if (iDown && GameManager.Instance.GetInsideMode())
+        else if (rDown && GameManager.Instance.GetInsideMode())
         {
+            Player.SetActive(false);
             InsideGroup.SetActive(false);
             GameManager.Instance.SetInsideMode(false);
         }
